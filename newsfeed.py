@@ -6,6 +6,7 @@ import json
 
 from secret.newsapi_apikey import API_KEY
 from cache import Cache
+from requestcounter import RequestCounter
 
 
 class NewsFeed:
@@ -47,38 +48,17 @@ if __name__ == '__main__':
         print(f"using cache: {cache.cachepath}")
         news = cache.load()
     else:
-        try:
-            request_counter_path = 'files/request-counter.txt'
-            with open(request_counter_path, 'r') as fp:
-                date = fp.readline().rstrip()
-                request_count = fp.readline().rstrip()
-                date = datetime.datetime.strptime(date, '%Y-%m-%d')
-                request_count = int(request_count)
-        except OSError as ose:
-            print(ose)
-            date = datetime.date.today().isoformat()
-            request_count = 0
-
-        print(date, request_count)
+        rc = RequestCounter()
+        print(rc.date, rc.count)
 
         print(f'using requests: {url}')
         # response = requests.get(url)                    # get response
         # news = response.json()                          # get json
 
-        try:
-            request_counter_path = 'files/request-counter.txt'
-            with open(request_counter_path, 'w') as fp:
-                request_count += 1
-                date = datetime.date.today().isoformat()
-                fp.write(f'{date}\n')
-                fp.write(f'{str(request_count)}\n')
-        except OSError as ose:
-            print(ose)
-            exit(1)
+        rc.update(rc.count +1)
 
-    print(date, request_count)
-    exit()
+    print(rc.date, rc.count)
 
-    print(type(news))                                   # dict
+    # print(type(news))                                   # dict
     # pprint(news, indent=4)                              # pprint json
-    cache.save(news)
+    # cache.save(news)
