@@ -10,26 +10,25 @@ class CacheDataMissingException(CacheException):
 
 
 class Cache:
-    # cache_filepath = 'files/news-cache.json'
     def __init__(
             self,
-            cachepath='files/news-cache.json',
+            cachepath='files/news-cache.json',          # default path
     ):
         self.url = None
         self.cachepath = cachepath
         self.data = None
 
     def get(self):
-        return self.data
+        return self.data                                # get data
 
     def load(self):
-        with open(self.cachepath) as fp:
+        with open(self.cachepath) as fp:                # load data
             self.data = json.load(fp)
-        return self.data
+        return self.data                                # return data
 
     def save(self, url, data):
         self.url = url
-        self.data = {}
+        self.data = {}                                  # create dict
         self.data.update(data)
 
         if self.data:
@@ -46,5 +45,4 @@ class Cache:
                     indent=4                            # pretty print
                 )
         else:
-            raise CacheDataMissingException
-
+            raise CacheDataMissingException             # cannot be empty
