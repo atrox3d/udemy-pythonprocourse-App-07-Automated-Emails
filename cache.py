@@ -13,13 +13,11 @@ class Cache:
     # cache_filepath = 'files/news-cache.json'
     def __init__(
             self,
-            url,
-            data=None,
             cachepath='files/news-cache.json',
     ):
-        self.url = url
+        self.url = None
         self.cachepath = cachepath
-        self.data = data
+        self.data = None
 
     def get(self):
         return self.data
@@ -29,7 +27,8 @@ class Cache:
             self.data = json.load(fp)
         return self.data
 
-    def save(self, data):
+    def save(self, url, data):
+        self.url = url
         self.data = {}
         self.data.update(data)
 

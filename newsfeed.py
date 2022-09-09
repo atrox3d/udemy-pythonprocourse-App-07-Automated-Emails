@@ -42,7 +42,7 @@ if __name__ == '__main__':
         )
     print(f'url: {url}')
 
-    cache = Cache(url)
+    cache = Cache()
     if USE_CACHE := False:                               # save calls per day
         print(f"using cache: {cache.cachepath}")
         news = cache.load()
