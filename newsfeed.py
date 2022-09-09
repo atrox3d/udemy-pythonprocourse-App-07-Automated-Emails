@@ -55,7 +55,7 @@ if __name__ == '__main__':
         # response = requests.get(url)                    # get response
         # news = response.json()                          # get json
 
-        rc.update(rc.count +1)
+        rc.update()
 
     print(rc.date, rc.count)
 

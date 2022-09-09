@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 
 class RequestCounter:
@@ -18,23 +18,37 @@ class RequestCounter:
     def _load(self):
         try:
             with open(self.counterpath, 'r') as fp:
-                date = fp.readline().rstrip()
-                request_count = fp.readline().rstrip()
-                self.date = datetime.datetime.strptime(date, '%Y-%m-%d')
-                self.count = int(request_count)
-        except OSError as ose:
-            # print(ose)
-            self.date = datetime.date.today().isoformat()
-            self.count = 0
+                date = fp.readline().rstrip()                                   # read date from file
+                self.date = datetime.strptime(date, '%Y-%m-%d').date()          # convert to date
+                # print(f"_open | self.date | {self.date}")
 
-    def update(self, count, date=None):
+                request_count = fp.readline().rstrip()                          # read count from file
+                self.count = int(request_count)                                 # converto to int
+
+                today = datetime.now().date()                                   # get today's date
+                # print(f"_open | today     | {today}")
+                if self.date < today:                                           # if file older than today
+                    print(
+                        f"_open | "
+                        f"date on file {self.date} older than "
+                        f"today {today}, resetting")
+                    self._reset()                                               # reset like account does
+
+        except OSError as ose:
+            self._reset()                                                       # no file, reset
+
+    def _reset(self):
+        self.date = datetime.now().date()
+        self.count = 0
+
+    def update(self, count=None, date=None):
         try:
             with open(self.counterpath, 'w') as fp:
-                # request_count += 1
-                self.date = date or datetime.date.today().isoformat()
-                self.count = count
-                fp.write(f'{self.date}\n')
-                fp.write(f'{str(self.count)}\n')
+                self.date = date or datetime.now().date()                       # use date param or today's
+                fp.write(f'{self.date}\n')                                      # write on file
+
+                self.count = count or self.count + 1                            # use count param or increment
+                fp.write(f'{str(self.count)}\n')                                # write on file
         except OSError as ose:
-            print(ose)
+            print(ose)                                                          # fatal
             exit(1)
