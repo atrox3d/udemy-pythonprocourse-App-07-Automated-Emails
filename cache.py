@@ -21,13 +21,17 @@ class Cache:
         self.cachepath = cachepath
         self.data = data
 
+    def get(self):
+        return self.data
+
     def load(self):
         with open(self.cachepath) as fp:
             self.data = json.load(fp)
         return self.data
 
-    def save(self, data=None):
-        self.data = data or self.data
+    def save(self, data):
+        self.data = {}
+        self.data.update(data)
 
         if self.data:
             with open(self.cachepath, 'w') as fp:       # save json to file news-cache.json
