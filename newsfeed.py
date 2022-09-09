@@ -23,6 +23,7 @@ if __name__ == '__main__':
     endpoint = 'everything'
     topic = 'cats'
 
+    # TODO: check date format
     today = datetime.date.today()                        # today
     onemonth = relativedelta(months=1)                   # +/- 1 month
     from_date = (today - onemonth).isoformat()           # 1 month ago YY-mm-dd
@@ -31,11 +32,12 @@ if __name__ == '__main__':
     sort_by = 'popularity'
     language = 'en'
 
+    # TODO: create params from a collection
     url = (                                             # compose url
         f'{base_url}/'                                  # base url
         f'{endpoint}?q='                                # endpoint
         f'{topic}&'                                     # query params
-        f'from={from_date}&'                            # TODO: create params from a collection
+        f'from={from_date}&'                            
         f'to={to_date}&'
         f'sortBy={sort_by}&'
         f'language={language}&'
