@@ -22,6 +22,10 @@ class Cache:
         return self.data                                # get data
 
     def load(self):
+        """
+        loads json dict
+        :return: dict
+        """
         with open(self.cachepath) as fp:                # load data
             self.data = json.load(fp)
         return self.data                                # return data

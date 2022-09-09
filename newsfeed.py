@@ -44,7 +44,7 @@ if __name__ == '__main__':
     print(f'url: {url}')
 
     cache = Cache()
-    if USE_CACHE := False:                               # save calls per day
+    if USE_CACHE := True:                               # save calls per day
         print(f"using cache: {cache.cachepath}")
         news = cache.load()
     else:
@@ -52,13 +52,12 @@ if __name__ == '__main__':
         print(rc.date, rc.count)
 
         print(f'using requests: {url}')
-        # response = requests.get(url)                    # get response
-        # news = response.json()                          # get json
+        response = requests.get(url)                    # get response
+        news = response.json()                          # get json
 
         rc.update()
+        print(rc.date, rc.count)
 
-    print(rc.date, rc.count)
-
-    # print(type(news))                                   # dict
+    print(type(news))                                   # dict
     # pprint(news, indent=4)                              # pprint json
-    # cache.save(news)
+    cache.save(url, news)
