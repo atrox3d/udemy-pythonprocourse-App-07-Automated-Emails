@@ -27,6 +27,7 @@ class Cache:
         loads json dict
         :return: dict
         """
+        print(f"Cache | load | using cache: {self.cachepath} | loading...")
         with open(self.cachepath) as fp:                # load data
             self.data = json.load(fp)
         return self.data                                # return data
@@ -38,6 +39,7 @@ class Cache:
         self.data.update(data)
 
         if self.data:
+            print(f"Cache | save | using cache: {self.cachepath} | saving...")
             with open(self.cachepath, 'w') as fp:       # save json to file news-cache.json
 
                 # TODO: url should be the key to the item containing the dict but today's date changes
