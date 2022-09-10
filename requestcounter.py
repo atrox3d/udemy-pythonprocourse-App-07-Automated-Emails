@@ -18,11 +18,11 @@ class RequestCounter:
     def _load(self):
         try:
             with open(self.counterpath, 'r') as fp:
-                date = fp.readline().rstrip()                                   # read date from file
+                date = fp.readline().rstrip('\n')                               # read date from file
                 self.date = datetime.strptime(date, '%Y-%m-%d').date()          # convert to date
                 # print(f"_open | self.date | {self.date}")
 
-                request_count = fp.readline().rstrip()                          # read count from file
+                request_count = fp.readline().rstrip('\n')                      # read count from file
                 self.count = int(request_count)                                 # converto to int
 
                 today = datetime.now().date()                                   # get today's date

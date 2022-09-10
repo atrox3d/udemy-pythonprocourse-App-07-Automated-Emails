@@ -21,6 +21,7 @@ class Cache:
     def get(self):
         return self.data                                # get data
 
+    # TODO: cache should load a dict for each url but today's date changes
     def load(self):
         """
         loads json dict
@@ -30,6 +31,7 @@ class Cache:
             self.data = json.load(fp)
         return self.data                                # return data
 
+    # TODO: cache should save a dict for each url but today's date changes
     def save(self, url, data):
         self.url = url
         self.data = {}                                  # create dict
@@ -38,6 +40,7 @@ class Cache:
         if self.data:
             with open(self.cachepath, 'w') as fp:       # save json to file news-cache.json
 
+                # TODO: url should be the key to the item containing the dict but today's date changes
                 # https://www.geeksforgeeks.org/python-append-items-at-beginning-of-dictionary/
                 url_first = dict(url=self.url)          # try to save url on top of json
                 url_first.update(self.data)

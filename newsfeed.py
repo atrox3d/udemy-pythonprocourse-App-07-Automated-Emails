@@ -1,8 +1,6 @@
 import requests
-from pprint import pprint
 import datetime
 from dateutil.relativedelta import relativedelta
-import json
 
 from secret.newsapi_apikey import API_KEY
 from cache import Cache
@@ -46,7 +44,7 @@ if __name__ == '__main__':
     print(f'url: {url}')
 
     cache = Cache()
-    if USE_CACHE := True:                               # save calls per day
+    if USE_CACHE := False:                               # save calls per day
         print(f"using cache: {cache.cachepath}")
         news = cache.load()
     else:
