@@ -42,8 +42,23 @@ class NewsFeed:
         :param search_in:
         """
         self.interest = interest
-        self.from_date = self.yesterday() if from_date is None else from_date
-        self.to_date = self.today() if to_date is None else to_date
+        self.from_date = from_date or self.yesterday()      # null coalescing
+        self.to_date = to_date or self.today()              # null coalescing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         self.language = language
         self.search_in = search_in
         self.sort_by = sort_by
@@ -124,6 +139,7 @@ if __name__ == '__main__':
         language='en'
     )
     print(nf.url)
+    exit()
     mail = nf.get_mailbody()
     print()
     print(mail)
