@@ -47,7 +47,7 @@ class NewsFeed:
         self.language = language
         self.search_in = search_in
         self.sort_by = sort_by
-        self.url = self._composeurl()
+        self.url = self._build_url()
 
         self.cache = Cache()
         self.request_counter = RequestCounter()
@@ -70,7 +70,7 @@ class NewsFeed:
                 dateutil.relativedelta.relativedelta(months=1)
         ).strftime('%Y-%m-%d')
 
-    def _composeurl(self):
+    def _build_url(self):
         # TODO: create params from a collection
         url = (                                                 # compose url
             f'{self.base_url}/'                                 # base url
