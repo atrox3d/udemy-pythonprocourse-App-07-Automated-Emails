@@ -17,8 +17,8 @@ class NewsFeed:
     def __init__(
             self,
             interest,
-            from_date=None,
-            to_date=None,
+            from_date=None,                                 # sentinel
+            to_date=None,                                   # sentinel
             language='en',
             sort_by='popularity',
             search_in='title'
@@ -52,19 +52,19 @@ class NewsFeed:
         self.cache = Cache()
         self.request_counter = RequestCounter()
 
-    @classmethod
-    def today(cls):
+    @staticmethod
+    def today():
         return datetime.datetime.now().strftime('%Y-%m-%d')
 
-    @classmethod
-    def yesterday(cls):
+    @staticmethod
+    def yesterday():
         return (
                 datetime.datetime.now() -
                 datetime.timedelta(days=1)
         ).strftime('%Y-%m-%d')
 
-    @classmethod
-    def month(cls):
+    @staticmethod
+    def month():
         return (
                 datetime.datetime.now() -
                 dateutil.relativedelta.relativedelta(months=1)
