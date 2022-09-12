@@ -44,21 +44,6 @@ class NewsFeed:
         self.interest = interest
         self.from_date = from_date or self.yesterday()      # null coalescing
         self.to_date = to_date or self.today()              # null coalescing
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         self.language = language
         self.search_in = search_in
         self.sort_by = sort_by
